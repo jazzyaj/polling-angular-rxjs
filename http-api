@@ -1,0 +1,36 @@
+const pollRoutr = require("express").Router();
+
+function poll(taskId) {
+    test = [{
+        processing: true,
+        taskId: 1
+      },
+      {
+        processing: true,
+        taskId: 2
+      },
+      {
+        processing: true,
+        taskId: 3
+      },
+      {
+        processing: true,
+        taskId: 4
+      },
+      {
+        processing: false,
+        taskId: 5
+      }]
+      result = test.find(v=>(v.taskId).toString() == taskId? true:false);
+    return {
+        generated : result.processing
+      }
+        
+}
+
+pollRoutr.route("/:pollid")
+.get(function (req, res) {
+    res.send(poll(req.params.pollid));
+});
+
+module.exports = pollRoutr;
